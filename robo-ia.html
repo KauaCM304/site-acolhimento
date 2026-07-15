@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porto — Apoio Psicossocial NR-1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #fdfbf7 0%, #f7f3e3 100%); }
+        .chat-container::-webkit-scrollbar { width: 6px; }
+        .chat-container::-webkit-scrollbar-track { background: transparent; }
+        .chat-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#0f3d2e] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="hover:opacity-80 transition flex items-center space-x-3">
+                    <div class="bg-white/10 p-2.5 rounded-xl">
+                        <i class="fa-solid fa-arrow-left text-xl text-[#4ade80]"></i>
+                    </div>
+                    <span class="font-bold text-lg tracking-wide uppercase">Voltar ao Início</span>
+                </a>
+            </div>
+            <div id="user-pill" class="hidden sm:flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full border border-white/10 text-sm font-medium">
+                <i class="fa-regular fa-user-circle text-md"></i>
+                <span id="nav-user-name">Usuário</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER DE APRESENTAÇÃO -->
+    <header class="max-w-5xl mx-auto px-6 pt-10 pb-4 w-full space-y-4">
+        <div class="inline-flex items-center gap-2 bg-[#0f3d2e]/10 border border-[#0f3d2e]/20 text-[#0f3d2e] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            Módulo NR-1 · Prevenção de Riscos Psicossociais
+        </div>
+        <div class="space-y-1">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0f3d2e] tracking-tight">Porto: Espaço de Escuta Ativa</h1>
+            <p class="text-slate-600 max-w-3xl text-sm sm:text-base leading-relaxed">
+                Um assistente inteligente de triagem e apoio para ajudar a identificar esgotamento, sobrecarga ou assédio. Suas interações guiam você para os próximos passos ideais dentro da organização.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN GRID DE INTERAÇÃO -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 pb-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- COLUNA ESQUERDA: MAPA DE RISCOS -->
+        <section class="lg:col-span-4 space-y-4">
+            <div class="bg-white/60 border border-slate-200 p-5 rounded-2xl backdrop-blur-sm">
+                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wide mb-1">Mapa de Sintomas</h3>
+                <p class="text-xs text-slate-500 mb-4">Selecione uma categoria abaixo para iniciar o diálogo direcionado ou relate livremente na caixa de mensagens.</p>
+                
+                <div class="grid grid-cols-1 gap-2.5" id="hive">
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-[#0f3d2e] hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="burnout">
+                        <span class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-md">🔥</span>
+                        <span>Esgotamento / Burnout</span>
+                    </button>
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-[#0f3d2e] hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="assedio_moral">
+                        <span class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-md">⚠️</span>
+                        <span>Assédio Moral</span>
+                    </button>
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-red-500 hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="assedio_sexual">
+                        <span class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-md">🛑</span>
+                        <span>Assédio Sexual</span>
+                    </button>
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-[#0f3d2e] hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="sobrecarga">
+                        <span class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-md">📈</span>
+                        <span>Sobrecarga de Trabalho</span>
+                    </button>
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-[#0f3d2e] hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="autonomia">
+                        <span class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-md">🔒</span>
+                        <span>Falta de Autonomia</span>
+                    </button>
+                    <button class="flex items-center space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-left hover:border-[#0f3d2e] hover:bg-[#fdfbf7] transition font-medium text-sm text-slate-700 w-full" data-topic="desconexao">
+                        <span class="w-8 h-8 rounded-lg bg-teal-100 flex items-center justify-center text-md">🔌</span>
+                        <span>Inabilidade de Desconexão</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-[#fef3c7] border border-[#fde68a] rounded-2xl p-4 text-xs text-amber-900 leading-relaxed space-y-1.5">
+                <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-700"></i> Suporte Imediato à Vida</p>
+                <p>Se estiver enfrentando angústia extrema ou ideação de auto-risco, procure atendimento humano imediato: <strong>Ligue CVV 188</strong> ou SAMU 192.</p>
+            </div>
+        </section>
+
+        <!-- COLUNA DIREITA: CHAT -->
+        <section class="lg:col-span-8">
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden flex flex-col h-[520px]">
+                
+                <!-- Topo do Painel de Chat -->
+                <div class="bg-[#0f3d2e] px-5 py-4 flex items-center justify-between border-b border-emerald-950">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-[#4ade80] text-[#0f3d2e] flex items-center justify-center font-bold text-lg shadow-inner">
+                            P
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-sm sm:text-base">Porto</div>
+                            <div class="text-[11px] text-[#4ade80] font-medium">Triagem de Suporte NR-1</div>
+                        </div>
+                    </div>
+                    <button id="resetBtn" class="text-xs border border-white/20 hover:border-white/50 text-white px-3 py-1.5 rounded-xl transition font-medium bg-white/5">
+                        Reiniciar
+                    </button>
+                </div>
+
+                <!-- Info de Segurança -->
+                <div class="bg-[#fdfbf7] px-5 py-2.5 border-b border-slate-200 text-xs text-slate-600 font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-user-lock text-emerald-700"></i>
+                    <span>Ambiente seguro e confidencial. O histórico de conversas é armazenado localmente em seu dispositivo.</span>
+                </div>
+
+                <!-- Área de Mensagens -->
+                <div id="messages" class="chat-container flex-grow p-5 overflow-y-auto bg-[#fdfbf7]/40 flex flex-col gap-3.5">
+                    <!-- Geradas via JS -->
+                </div>
+
+                <!-- Input -->
+                <div class="p-4 bg-white border-t border-slate-200 flex items-end gap-3">
+                    <textarea id="input" placeholder="Relate detalhadamente o cenário que você enfrenta..." rows="1" class="flex-grow bg-[#fdfbf7] border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#0f3d2e] focus:bg-white transition resize-none max-h-24 min-h-[44px]"></textarea>
+                    <button id="sendBtn" class="bg-[#0f3d2e] hover:bg-[#0b2e22] text-white p-3 rounded-2xl transition shadow-md disabled:opacity-40 disabled:cursor-not-allowed h-11 w-11 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-paper-plane text-sm text-[#4ade80]"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const topics = {
+            burnout: "Tenho sentido um esgotamento constante no trabalho, como um cansaço que o descanso não resolve.",
+            assedio_moral: "Tenho passado por situações de humilhação, pressão excessiva ou desrespeito por parte de alguém no trabalho.",
+            assedio_sexual: "Tenho vivido uma situação de assédio sexual no ambiente de trabalho e não sei como agir.",
+            sobrecarga: "Sinto que a quantidade de trabalho que recebo está acima do que consigo dar conta.",
+            autonomia: "Sinto que não tenho autonomia nenhuma nas minhas decisões e tarefas no trabalho.",
+            desconexao: "Tenho muita dificuldade de desconectar do trabalho fora do horário — mensagens e cobranças não param."
+        };
+
+        let history = [];
+        const messagesEl = document.getElementById('messages');
+        const input = document.getElementById('input');
+        const sendBtn = document.getElementById('sendBtn');
+        const hive = document.getElementById('hive');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Regex para detecção ultra-sensível de risco à vida / crise extrema
+        const crisisPattern = /(me matar|suicid|acabar com (a )?minha vida|nao aguento mais viver|não aguento mais viver|automutila|me cortar|desistir de viver|desistir da vida|por um fim em tudo|dar fim a minha vida|quero morrer|morte|tirar minha vida)/i;
+
+        window.onload = function() {
+            const userName = localStorage.getItem('user_name');
+            if (userName) {
+                document.getElementById('user-pill').classList.remove('hidden');
+                document.getElementById('nav-user-name').innerText = userName.split(' ')[0];
+            }
+            welcome();
+        }
+
+        function addMessage(role, text) {
+            const wrapper = document.createElement('div');
+            wrapper.className = role === 'user' ? 'flex justify-end w-full' : 'flex justify-start w-full';
+            
+            const div = document.createElement('div');
+            div.className = role === 'user' 
+                ? 'max-w-[85%] sm:max-w-[70%] bg-[#0f3d2e] text-white text-sm font-medium px-4 py-3 rounded-2xl rounded-tr-none shadow-sm text-left whitespace-pre-wrap'
+                : 'max-w-[85%] sm:max-w-[70%] bg-white border border-slate-200 text-slate-700 text-sm font-medium px-4 py-3 rounded-2xl rounded-tl-none shadow-sm text-left whitespace-pre-wrap';
+            
+            div.textContent = text;
+            wrapper.appendChild(div);
+            messagesEl.appendChild(wrapper);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function addCrisisBanner() {
+            const div = document.createElement('div');
+            div.className = 'w-full bg-red-50 border border-red-200 p-4 rounded-xl text-xs text-red-900 leading-relaxed';
+            div.innerHTML = '💙 <strong>Percebo que este momento está muito pesado.</strong> Você não precisa passar por isso sozinho. Busque suporte imediato: <strong>Ligue 188 (CVV)</strong> que é gratuito e anônimo.';
+            messagesEl.appendChild(div);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function addTyping() {
+            const div = document.createElement('div');
+            div.className = 'flex items-center space-x-1.5 bg-slate-200/60 self-start px-4 py-3 rounded-2xl rounded-tl-none text-slate-400 text-xs font-bold w-16 justify-center';
+            div.id = 'typingIndicator';
+            div.innerHTML = '<span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></span><span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span><span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>';
+            messagesEl.appendChild(div);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function removeTyping() {
+            const t = document.getElementById('typingIndicator');
+            if (t) t.remove();
+        }
+
+        function welcome() {
+            messagesEl.innerHTML = '';
+            history = [];
+            const userName = localStorage.getItem('user_name') ? localStorage.getItem('user_name').split(' ')[0] : 'colaborador(a)';
+            addMessage('bot', `Olá, ${userName}! Sou o Porto. Este é um canal seguro para avaliarmos fatores de estresse, sobrecarga, relacionamento e clima organizacional (NR-1). Como você está se sentindo hoje ou qual a sua dúvida?`);
+        }
+
+        hive.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-topic]');
+            if (!btn) return;
+            const topic = btn.dataset.topic;
+            input.value = topics[topic];
+            input.focus();
+            input.style.height = 'auto';
+            input.style.height = input.scrollHeight + 'px';
+        });
+
+        resetBtn.addEventListener('click', welcome);
+
+        input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 96) + 'px';
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        // MOTOR DE PROCESSAMENTO DA IA BASEADO EM PALAVRAS-CHAVE ULTRA DETALHADO
+        function processarRespostaIA(userText) {
+            const text = userText.toLowerCase().trim();
+            const userName = localStorage.getItem('user_name') ? localStorage.getItem('user_name').split(' ')[0] : 'colaborador(a)';
+
+            // 1. FILTRO ABSOLUTO DE CRISE (Evita respostas frias, vagas ou curtas como "ok" ou "entendido")
+            if (crisisPattern.test(text)) {
+                return `Ei, ${userName}, por favor me escute: eu sinto muito que as coisas estejam parecendo tão difíceis e insuportáveis agora, mas você não precisa carregar essa dor sozinho. Eu sou apenas um assistente virtual e quero te ver bem e seguro. Existem pessoas preparadas para te acolher com total sigilo e amor agora mesmo. Por favor, entre em contato com o CVV ligando gratuitamente para o número 188. Eles estão disponíveis 24 horas por dia para conversar com você. Se puder, fale também com um profissional de saúde, familiar ou amigo próximo. Sua vida tem muito valor e você merece receber apoio neste exato momento.`;
+            }
+
+            // 2. GESTÃO DE SAUDAÇÕES
+            const saudacaoPattern = /^(ola|olá|oi|bom dia|boa tarde|boa noite|hello|hey|tudo bem|td bem|como vai|como voce esta)/i;
+            if (saudacaoPattern.test(text)) {
+                return `Olá, ${userName}! Como posso ajudar você hoje? Se estiver enfrentando algum desafio no trabalho ou quiser tirar dúvidas sobre a NR-1, estou aqui para ouvir e te orientar.`;
+            }
+
+            // 3. GESTÃO DE AGRADECIMENTOS E DESPEDIDAS
+            const agradecimentoPattern = /^(obrigado|obrigada|valeu|ok obrigado|entendi|perfeito|entendido|show|tchau|adeus|ate logo)/i;
+            if (agradecimentoPattern.test(text)) {
+                return "Imagina! Fico muito feliz em poder ajudar. Lembre-se de que sua saúde mental e segurança são prioridades máximas aqui. Se precisar de mais alguma orientação, desabafar de novo ou entender seus direitos, é só me chamar. Cuide-se e tenha um excelente dia!";
+            }
+
+            // 4. FLUXO DE CONFIRMAÇÃO DE AGENDAMENTOS
+            if (/quero|sim|aceito|gostaria|marcar|agendar|pode ser/i.test(text) && history.length > 1) {
+                return "Perfeito. Já formalizei e encaminhei o seu pedido de apoio psicossocial interno. Um profissional especializado entrará em contato com você de forma extremamente discreta, cuidadosa e confidencial nos próximos dias através dos seus contatos cadastrados.";
+            }
+
+            // 5. PALAVRA-CHAVE: ASSÉDIO MORAL, ABUSO DE PODER, HUMILHAÇÃO, GRITOS
+            if (/(assédio moral|assedio moral|humilha|abuso|abusivo|pressão excessiva|grita|ofende|ofensa|persegue|rebaixa|xingar|xinga|desprezo|ironia|constranger)/i.test(text)) {
+                return `Relatos de humilhação, perseguição ou tratamento desrespeitoso configuram violações graves ao código de conduta e à NR-1. Ninguém deve passar por isso. O mais indicado é que você junte provas (mensagens, e-mails, datas e testemunhas) e utilize o nosso Canal de Denúncias, que garante sigilo absoluto. Gostaria que eu explicasse o passo a passo de como fazer esse registro com segurança ou prefere que eu faça uma ponte direta para um acolhimento humano?`;
+            }
+
+            // 6. PALAVRA-CHAVE: ASSÉDIO SEXUAL, ABORDAGENS INAPROPRIADAS, CANTADAS
+            if (/(assédio sexual|assedio sexual|passou a mão|importun|olhar maldoso|cantada|proposta indecente|toque indesejado|conversas intimas)/i.test(text)) {
+                return `Atenção: Esse comportamento é inaceitável, constitui crime e viola severamente as regras da nossa organização. Você está protegida(o) pelas normas de segurança. Para sua proteção e início de uma investigação sigilosa, recomendamos registrar formalmente essa situação no Canal de Denúncias imediatamente. Você gostaria de orientações sobre como realizar essa denúncia de forma totalmente segura ou quer conversar confidencialmente com nosso setor de assistência social humano agora?`;
+            }
+
+            // 7. PALAVRA-CHAVE: BURNOUT, ESGOTAMENTO, EXAUSTÃO EXTREMA
+            if (/(burnout|esgotad|esgotament|exausto|exausta|exaustão|cansaço extremo|cansado|cansada|sem energia|limite emocional|crise de choro|panico|ansiedade)/i.test(text)) {
+                return `Sentir um esgotamento que não passa mesmo após o descanso é um forte indicador de Burnout. Isso afeta sua saúde física e emocional. O primeiro passo ideal sob as diretrizes da NR-1 é buscar uma reavaliação de demandas com a medicina do trabalho ou apoio especializado. Você gostaria de agendar uma consulta discreta com a nossa equipe de suporte psicossocial humano para vermos como aliviar esse cenário?`;
+            }
+
+            // 8. PALAVRA-CHAVE: SOBRECARGA, ACÚMULO DE TRABALHO, METAS IMPOSSÍVEIS
+            if (/(sobrecarga|muito trabalho|acumulo|acúmulo|metas impossiveis|meta abusiva|atarefado|atarefada|sem tempo|pressao por metas|trabalhando demais)/i.test(text)) {
+                return `Trabalhar constantemente acima dos limites de tempo e capacidade biológica gera adoecimento mental e é um dos riscos psicossociais mapeados pela NR-1. É essencial rever a distribuição de tarefas na sua equipe. Deseja orientação sobre como expor essa situação para a gestão de forma segura ou gostaria do intermédio confidencial do RH?`;
+            }
+
+            // 9. PALAVRA-CHAVE: FALTA DE AUTONOMIA, MICROGESTÃO, CONTROLE EXCESSIVO
+            if (/(autonomia|microgestao|microgestão|controle excessivo|nao deixa fazer|mando|decisao|decisão|bloqueia minhas ideias|fiscaliza)/i.test(text)) {
+                return `A microgestão extrema ou a total falta de espaço para propor soluções gera desmotivação crônica e desvalorização. Sob as normas de saúde ocupacional, a empresa deve promover a participação ativa do trabalhador. Deseja que a gente trace um plano de intermediação ou agende um bate-papo de realinhamento de processos com a gestão?`;
+            }
+
+            // 10. PALAVRA-CHAVE: DIFICULDADE DE DESCONEXÃO, TRABALHO FORA DA JORNADA
+            if (/(desconexao|desconexão|fora do horario|fora do horário|fds|fim de semana|responder mensagem|atender celular|noite|madrugada|feriado|horas extras excessivas)/i.test(text)) {
+                return `A falta de desconexão saudável impede a recuperação mental necessária e eleva o estresse para níveis críticos. Você tem o direito de desligar as notificações de trabalho fora da sua jornada contratada. Se as cobranças invasivas continuarem acontecendo, podemos intervir setorialmente de forma anônima junto à liderança. Gostaria de apoio com isso?`;
+            }
+
+            // 11. CONCEITO GERAL NR-1
+            if (/(o que é nr-1|o que significa nr-1|nr1|nr 1|norma regulamentadora 1|risco psicossocial|riscos psicossociais)/i.test(text)) {
+                return `A NR-1 (Norma Regulamentadora nº 1) estabelece que as empresas devem gerenciar todos os riscos ocupacionais, incluindo os psicossociais (como estresse excessivo, assédio, sobrecarga e esgotamento mental). Meu papel como Porto é ajudar a mapear e acolher preventivamente esses fatores, direcionando você aos canais de solução internos de forma segura.`;
+            }
+
+            // 12. GESTÃO DE ESCOPO (Evita que respondam sobre receitas, piadas ou assuntos sem sentido)
+            const escopoInvalido = /(receita|bolo|futebol|neymar|jogo de hoje|programação|javascript|html|css|python|filme|série|música|previsão do tempo|clima hoje|piada)/i;
+            if (escopoInvalido.test(text)) {
+                return "Como assistente focado em bem-estar e na prevenção de riscos psicossociais (NR-1), meu objetivo é te apoiar em desafios profissionais e de saúde emocional no trabalho. Infelizmente não posso te ajudar com assuntos externos a esse escopo. Se você tiver alguma dúvida sobre estresse, rotina ou clima na empresa, estou à inteira disposição.";
+            }
+
+            // 13. RESPOSTAS CONVERSACIONAIS EXPANDIDAS (Caso nenhuma palavra-chave direta seja acionada)
+            const respostasGerais = [
+                `Compreendo o que você está me relatando, ${userName}. Analisando seu caso sob os princípios da NR-1, o ambiente profissional deve oferecer segurança física e mental. Você acha que esse cenário tem afetado a sua saúde ou o seu desempenho nas atividades diárias? Podemos providenciar uma conversa confidencial de apoio humano, se quiser.`,
+                `Obrigado por confiar em mim para compartilhar isso, ${userName}. Situações desgastantes no trabalho drenam nossas energias rapidamente. Para que eu possa te fornecer a melhor orientação prática: você prefere que eu te explique como reportar isso internamente ou gostaria de agendar uma conversa com nosso suporte de acolhimento psicossocial?`,
+                `Entendo perfeitamente a complexidade do que você mencionou. Preservar sua integridade mental no trabalho é um direito seu. Se esse cenário está gerando ansiedade ou angústia, o ideal é não guardar isso apenas para você. Gostaria de falar com um profissional de forma privada e discreta sobre esse assunto?`
+            ];
+            
+            return respostasGerais[Math.floor(Math.random() * respostasGerais.length)];
+        }
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage('user', text);
+            history.push({ role: 'user', content: text });
+            input.value = '';
+            input.style.height = '44px';
+            sendBtn.disabled = true;
+
+            const userName = localStorage.getItem('user_name');
+            const userEmail = localStorage.getItem('user_email');
+            const userEmpresa = localStorage.getItem('user_empresa');
+
+            // 1. Logs locais comuns do usuário
+            const logs = JSON.parse(localStorage.getItem('historico_atividades')) || [];
+            logs.push({
+                tipo: 'ia_dialogo',
+                titulo: 'Consulta Assistente Porto (NR-1)',
+                detalhe: `Mensagem enviada: "${text.substring(0, 60)}${text.length > 60 ? '...' : ''}"`,
+                data: new Date().toLocaleString('pt-BR')
+            });
+            localStorage.setItem('historico_atividades', JSON.stringify(logs));
+
+            // 2. Registra na Base Geral de Consultas para o Admin do Setor
+            const dbConsultas = JSON.parse(localStorage.getItem('admin_db_consultas')) || [];
+            dbConsultas.push({
+                pergunta: text,
+                usuario: userName,
+                email: userEmail,
+                empresa: userEmpresa,
+                data: new Date().toLocaleString('pt-BR')
+            });
+            localStorage.setItem('admin_db_consultas', JSON.stringify(dbConsultas));
+
+            // Dispara banner de crise na tela se bater no padrão de perigo de vida
+            if (crisisPattern.test(text)) {
+                addCrisisBanner();
+            }
+
+            addTyping();
+
+            // Executa a resposta simulada e inteligente localmente, agindo como o cérebro da IA
+            setTimeout(() => {
+                removeTyping();
+                const aiReply = processarRespostaIA(text);
+                addMessage('bot', aiReply);
+                history.push({ role: 'assistant', content: aiReply });
+                sendBtn.disabled = false;
+            }, 1000); // 1 segundo de delay para simular de forma realista a digitação humana
+        }
+    </script>
+</body>
+</html>

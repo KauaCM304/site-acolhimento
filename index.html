@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Acolhimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(135deg, #f2f9f5 0%, #faf6ee 100%); 
+        }
+        .hero-gradient { 
+            background: radial-gradient(circle at 80% 20%, rgba(15, 61, 46, 0.03) 0%, transparent 60%); 
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased hero-gradient">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#0f3d2e] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 flex items-center justify-center bg-white rounded-xl overflow-hidden p-1 shadow-sm">
+                    <img src="./img/logo.png.png" alt="Logo" class="w-full h-full object-contain block" onerror="this.src='https://placehold.co/100x100?text=Logo'">
+                </div>
+                <span class="font-bold text-lg tracking-wide uppercase">Centro de Acolhimento</span>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div id="user-area" class="flex items-center space-x-3">
+                    <button onclick="openAuthModal('login')" class="flex items-center space-x-2 bg-[#4ade80] text-slate-900 hover:bg-[#22c55e] px-5 py-2.5 rounded-full transition text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Entrar / Login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-6">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#4ade80]/10 text-emerald-700 tracking-wide uppercase">
+                Espaço Seguro & Confidencial
+            </span>
+            <div class="space-y-1">
+                <h1 class="text-3xl font-medium text-slate-600">Bem-vindo(a) ao</h1>
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-[#0f3d2e] leading-tight">Centro de Acolhimento</h2>
+            </div>
+            <p class="text-lg text-slate-600 max-w-xl leading-relaxed">
+                Aqui você encontra apoio personalizado, informações transparentes e um canal estritamente seguro e acolhedor para ser ouvido(a).
+            </p>
+            
+            <div class="pt-2 flex flex-wrap gap-4">
+                <a href="robo-ia.html" target="_blank" onclick="return verificarAcesso(event, 'robo-ia.html')" class="group relative inline-flex items-center justify-center bg-[#4ade80] text-slate-900 font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-[#22c55e] transition-all duration-300 transform hover:-translate-y-0.5 overflow-hidden">
+                    <i class="fa-solid fa-robot mr-3 text-lg group-hover:animate-bounce"></i>
+                    Porto - IA de conselhos
+                    <i class="fa-solid fa-arrow-right ml-3 text-sm opacity-70 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <!-- BOTÃO DO PAINEL DO ADMIN -->
+                <a id="btn-admin-panel" href="admin.html" class="hidden inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-user-gear mr-3 text-lg"></i>
+                    Painel de Administração
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 flex justify-center items-center relative">
+            <div class="absolute w-72 h-72 bg-[#4ade80]/10 rounded-full blur-3xl -z-10"></div>
+            <div class="relative bg-white/75 p-8 rounded-3xl border border-white/80 shadow-xl backdrop-blur-md flex flex-col items-center text-center max-w-sm">
+                <div class="w-24 h-24 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-heart text-4xl text-emerald-500 animate-pulse"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 text-lg mb-1">Cuidado e Respeito</h3>
+                <p class="text-sm text-slate-500">Estamos aqui para apoiar a sua jornada e bem-estar no ambiente de trabalho.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- CARDS SECTION -->
+    <section class="max-w-7xl mx-auto px-6 pb-12 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-sm hover:shadow-xl border border-white/60 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-5 border border-emerald-100">
+                        <i class="fa-solid fa-user-shield text-2xl text-emerald-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Meus Dados</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">Acesse e veja de forma 100% transparente quais dados e informações a plataforma possui sobre você.</p>
+                </div>
+                <a href="meus-dados.html" onclick="return verificarAcesso(event, 'meus-dados.html')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-[#4ade80] hover:text-slate-900 hover:border-[#4ade80] transition-all duration-200">
+                    <span>Ver meus dados</span>
+                    <i class="fa-solid fa-chevron-right text-xs opacity-60 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-sm hover:shadow-xl border border-white/60 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-5 border border-amber-100">
+                        <i class="fa-solid fa-star text-2xl text-amber-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Feedback</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">Envie sugestões construtivas e colabore para construir um ambiente de convivência cada vez melhor.</p>
+                </div>
+                <a href="feedback.html" onclick="return verificarAcesso(event, 'feedback.html')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-[#4ade80] hover:text-slate-900 hover:border-[#4ade80] transition-all duration-200">
+                    <span>Enviar feedback</span>
+                    <i class="fa-solid fa-chevron-right text-xs opacity-60 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-sm hover:shadow-xl border border-white/60 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mb-5 border border-red-100">
+                        <i class="fa-solid fa-triangle-exclamation text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Denúncia</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">Relate condutas inadequadas de forma totalmente segura, protegida, confidencial e, se preferir, anônima.</p>
+                </div>
+                <a href="denuncia.html" onclick="return verificarAcesso(event, 'denuncia.html')" class="w-full flex items-center justify-between py-3 px-4 rounded-xl border border-red-200 text-sm font-semibold text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-200">
+                    <span>Fazer denúncia</span>
+                    <i class="fa-solid fa-chevron-right text-xs opacity-60 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SESSÃO DE EMPRESAS PARCEIRAS -->
+    <section class="max-w-7xl mx-auto px-6 pb-20 w-full">
+        <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 border border-white/60 shadow-sm text-center">
+            <h3 class="text-xs font-bold text-[#0f3d2e]/60 uppercase tracking-widest mb-6">Nossas Empresas Parceiras</h3>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+                <div class="flex flex-col items-center space-y-1 group">
+                    <span class="font-extrabold text-xl text-slate-400 group-hover:text-[#0f3d2e] transition duration-300 tracking-wider">FIRJAN</span>
+                    <span class="text-[10px] uppercase font-bold text-[#4ade80] opacity-0 group-hover:opacity-100 transition duration-300">Conveniada</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 group">
+                    <span class="font-extrabold text-xl text-slate-400 group-hover:text-[#0f3d2e] transition duration-300 tracking-wider">L'ORÉAL</span>
+                    <span class="text-[10px] uppercase font-bold text-[#4ade80] opacity-0 group-hover:opacity-100 transition duration-300">Conveniada</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 group">
+                    <span class="font-extrabold text-xl text-slate-400 group-hover:text-[#0f3d2e] transition duration-300 tracking-wider">SMART FIT</span>
+                    <span class="text-[10px] uppercase font-bold text-[#4ade80] opacity-0 group-hover:opacity-100 transition duration-300">Conveniada</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 group">
+                    <span class="font-extrabold text-xl text-slate-400 group-hover:text-[#0f3d2e] transition duration-300 tracking-wider">GOOGLE</span>
+                    <span class="text-[10px] uppercase font-bold text-[#4ade80] opacity-0 group-hover:opacity-100 transition duration-300">Conveniada</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 group">
+                    <span class="font-extrabold text-xl text-slate-400 group-hover:text-[#0f3d2e] transition duration-300 tracking-wider">APPLE</span>
+                    <span class="text-[10px] uppercase font-bold text-[#4ade80] opacity-0 group-hover:opacity-100 transition duration-300">Conveniada</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÃO FLUTUANTE -->
+    <div class="fixed bottom-6 right-6 z-40 flex items-center space-x-3">
+        <div class="bg-slate-900 text-white text-xs py-2 px-3 rounded-xl shadow-lg hidden sm:block max-w-[200px] leading-snug border border-slate-800 opacity-90">
+            <span class="font-bold text-[#4ade80]">Pesquisas Disponíveis:</span> Clique para responder seus questionários.
+        </div>
+        <button onclick="irParaQuestionarios()" class="relative group w-14 h-14 bg-amber-500 text-slate-900 rounded-full flex items-center justify-center shadow-xl hover:bg-amber-400 hover:scale-105 transition-all duration-300">
+            <span class="absolute top-0 right-0 flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+            <i class="fa-solid fa-clipboard-question text-xl group-hover:rotate-12 transition-transform"></i>
+        </button>
+    </div>
+
+    <!-- MODAL INTEGRADO -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-[#faf6e8] w-full max-w-lg p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-100 mx-4 transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex border-b border-slate-200 mb-6">
+                <button id="tab-login" onclick="switchTab('login')" class="flex-1 pb-3 text-center border-b-2 border-[#0f3d2e] font-bold text-sm text-[#0f3d2e] transition">
+                    Acessar Conta
+                </button>
+                <button id="tab-cadastro" onclick="switchTab('cadastro')" class="flex-1 pb-3 text-center border-b-2 border-transparent font-semibold text-sm text-slate-400 hover:text-slate-600 transition">
+                    Cadastro Comum
+                </button>
+                <button id="tab-admin" onclick="switchTab('admin')" class="flex-1 pb-3 text-center border-b-2 border-transparent font-semibold text-sm text-slate-400 hover:text-slate-600 transition">
+                    Cadastro Admin
+                </button>
+                <button onclick="closeAuthModal()" class="pl-4 pb-3 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div id="auth-alert" class="hidden bg-red-50 border border-red-100 text-red-700 p-3 rounded-xl text-xs font-medium mb-4"></div>
+
+            <!-- FORMULÁRIO DE LOGIN -->
+            <form id="form-login" onsubmit="realizarLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">E-mail Corporativo</label>
+                    <input type="email" id="login-email" required placeholder="nome@empresa.com" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Senha</label>
+                    <input type="password" id="login-pass" required placeholder="••••••••" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                </div>
+                <button type="submit" class="w-full bg-[#0f3d2e] hover:bg-[#0b2e22] text-white font-bold py-3.5 rounded-xl transition shadow-md mt-2">
+                    Entrar no Sistema
+                </button>
+            </form>
+
+            <!-- FORMULÁRIO DE CADASTRO NORMAL -->
+            <form id="form-cadastro" onsubmit="realizarCadastro(event, false)" class="space-y-4 hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Nome Completo</label>
+                        <input type="text" id="cad-nome" required placeholder="Ex: João Silva" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">E-mail Corporativo</label>
+                        <input type="email" id="cad-email" required placeholder="nome@empresa.com" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Empresa Parceira</label>
+                        <select id="cad-empresa" required class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                            <option value="">Selecione...</option>
+                            <option value="firjan">Firjan</option>
+                            <option value="loreal">L'Oréal</option>
+                            <option value="smart fit">Smart Fit</option>
+                            <option value="google">Google</option>
+                            <option value="apple">Apple</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Setor / Depto</label>
+                        <input type="text" id="cad-setor" required placeholder="Ex: Logística" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Função / Cargo</label>
+                        <input type="text" id="cad-funcao" required placeholder="Ex: Operador" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Telefone / WhatsApp</label>
+                        <input type="tel" id="cad-telefone" required placeholder="(00) 99999-0000" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Senha</label>
+                        <input type="password" id="cad-senha" required placeholder="••••••••" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] transition">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-[#0f3d2e] hover:bg-[#0b2e22] text-white font-bold py-3.5 rounded-xl transition shadow-md mt-2">
+                    Finalizar Cadastro
+                </button>
+            </form>
+
+            <!-- FORMULÁRIO DE CADASTRO ADMIN -->
+            <form id="form-admin" onsubmit="realizarCadastro(event, true)" class="space-y-4 hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#7c3aed] mb-1.5">Nome do Administrador</label>
+                        <input type="text" id="adm-nome" required placeholder="Ex: Marina Souza" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7c3aed] transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#7c3aed] mb-1.5">E-mail de Admin (@adm...)</label>
+                        <input type="email" id="adm-email" required placeholder="marina@adm.empresa.com" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7c3aed] transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#7c3aed] mb-1.5">Empresa Parceira</label>
+                        <select id="adm-empresa" required class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7c3aed] transition">
+                            <option value="">Selecione...</option>
+                            <option value="firjan">Firjan</option>
+                            <option value="loreal">L'Oréal</option>
+                            <option value="smart fit">Smart Fit</option>
+                            <option value="google">Google</option>
+                            <option value="apple">Apple</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#7c3aed] mb-1.5">Senha de Admin</label>
+                        <input type="password" id="adm-senha" required placeholder="••••••••" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7c3aed] transition">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3.5 rounded-xl transition shadow-md mt-2">
+                    Criar Perfil Admin
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        const empresasParceiras = ['firjan', 'loreal', 'smart fit', 'google', 'apple'];
+
+        if (!localStorage.getItem('usuarios_cadastrados')) {
+            localStorage.setItem('usuarios_cadastrados', JSON.stringify([]));
+        }
+
+        function atualizarNavbar() {
+            const userName = localStorage.getItem('user_name');
+            const userArea = document.getElementById('user-area');
+            const isAdmin = localStorage.getItem('user_is_admin') === 'true';
+            const btnAdmin = document.getElementById('btn-admin-panel');
+
+            if (isAdmin && btnAdmin) {
+                btnAdmin.classList.remove('hidden');
+            } else if (btnAdmin) {
+                btnAdmin.classList.add('hidden');
+            }
+
+            if (userName) {
+                userArea.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <button onclick="logout()" class="text-xs font-semibold text-red-400 hover:text-red-300 mr-2 transition">Sair</button>
+                        <div class="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full border border-white/10 text-sm font-medium">
+                            <i class="fa-regular fa-user-circle text-lg"></i>
+                            <span>Olá, ${userName.split(' ')[0]}! ${isAdmin ? '<span class="text-purple-400 font-bold ml-1">ADM</span>' : ''}</span>
+                        </div>
+                    </div>`;
+            } else {
+                userArea.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="flex items-center space-x-2 bg-[#4ade80] text-slate-900 hover:bg-[#22c55e] px-5 py-2.5 rounded-full transition text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Entrar / Login</span>
+                    </button>`;
+            }
+        }
+
+        function openAuthModal(mode = 'login') {
+            const modal = document.getElementById('auth-modal');
+            document.getElementById('auth-alert').classList.add('hidden');
+            modal.classList.remove('hidden');
+            setTimeout(() => { 
+                modal.classList.remove('opacity-0'); 
+                modal.querySelector('div').classList.remove('scale-95'); 
+            }, 10);
+            switchTab(mode);
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 30);
+        }
+
+        function switchTab(mode) {
+            const tabLogin = document.getElementById('tab-login');
+            const tabCadastro = document.getElementById('tab-cadastro');
+            const tabAdmin = document.getElementById('tab-admin');
+            const formLogin = document.getElementById('form-login');
+            const formCadastro = document.getElementById('form-cadastro');
+            const formAdmin = document.getElementById('form-admin');
+            const alertBox = document.getElementById('auth-alert');
+
+            alertBox.classList.add('hidden');
+
+            const normalTabClass = "flex-1 pb-3 text-center border-b-2 border-transparent font-semibold text-sm text-slate-400 hover:text-slate-600 transition";
+            const activeTabClass = "flex-1 pb-3 text-center border-b-2 border-[#0f3d2e] font-bold text-sm text-[#0f3d2e] transition";
+            const activeAdminTabClass = "flex-1 pb-3 text-center border-b-2 border-[#7c3aed] font-bold text-sm text-[#7c3aed] transition";
+
+            tabLogin.className = normalTabClass;
+            tabCadastro.className = normalTabClass;
+            tabAdmin.className = normalTabClass;
+
+            formLogin.classList.add('hidden');
+            formCadastro.classList.add('hidden');
+            formAdmin.classList.add('hidden');
+
+            if (mode === 'login') {
+                tabLogin.className = activeTabClass;
+                formLogin.classList.remove('hidden');
+            } else if (mode === 'cadastro') {
+                tabCadastro.className = activeTabClass;
+                formCadastro.classList.remove('hidden');
+            } else if (mode === 'admin') {
+                tabAdmin.className = activeAdminTabClass;
+                formAdmin.classList.remove('hidden');
+            }
+        }
+
+        function realizarCadastro(e, criarComoAdmin) {
+            e.preventDefault();
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.classList.add('hidden');
+
+            let novoUsuario = {};
+            
+            if (criarComoAdmin) {
+                const email = document.getElementById('adm-email').value.trim().toLowerCase();
+                const empresa = document.getElementById('adm-empresa').value.trim().toLowerCase();
+                
+                if (!email.includes('@adm.')) {
+                    alertBox.textContent = "Erro: Administradores precisam usar um domínio contendo '@adm.' (Exemplo: nome@adm.empresa.com).";
+                    alertBox.classList.remove('hidden');
+                    return;
+                }
+
+                if (!empresasParceiras.includes(empresa)) {
+                    alertBox.textContent = "Erro: A empresa indicada não é parceira cadastrada.";
+                    alertBox.classList.remove('hidden');
+                    return;
+                }
+
+                novoUsuario = {
+                    nome: document.getElementById('adm-nome').value.trim(),
+                    email: email,
+                    empresa: empresa,
+                    senha: document.getElementById('adm-senha').value,
+                    isAdmin: true
+                };
+            } else {
+                const email = document.getElementById('cad-email').value.trim().toLowerCase();
+                const empresa = document.getElementById('cad-empresa').value.trim().toLowerCase();
+
+                if (email.includes('@adm.')) {
+                    alertBox.textContent = "Erro: Cadastro comum detectado com domínio de administrador (@adm). Use a aba 'Cadastro Admin'.";
+                    alertBox.classList.remove('hidden');
+                    return;
+                }
+
+                if (!empresasParceiras.includes(empresa)) {
+                    alertBox.textContent = "Erro: Desculpe, seu cadastro está limitado apenas a funcionários de empresas parceiras.";
+                    alertBox.classList.remove('hidden');
+                    return;
+                }
+
+                novoUsuario = {
+                    nome: document.getElementById('cad-nome').value.trim(),
+                    email: email,
+                    empresa: empresa,
+                    setor: document.getElementById('cad-setor').value.trim(),
+                    funcao: document.getElementById('cad-funcao').value.trim(),
+                    telefone: document.getElementById('cad-telefone').value.trim(),
+                    senha: document.getElementById('cad-senha').value,
+                    isAdmin: false
+                };
+            }
+
+            let usuarios = JSON.parse(localStorage.getItem('usuarios_cadastrados')) || [];
+
+            if (usuarios.some(u => u.email === novoUsuario.email)) {
+                alertBox.textContent = "Este e-mail corporativo já está cadastrado!";
+                alertBox.classList.remove('hidden');
+                return;
+            }
+
+            usuarios.push(novoUsuario);
+            localStorage.setItem('usuarios_cadastrados', JSON.stringify(usuarios));
+            
+            logarSessao(novoUsuario);
+        }
+
+        function realizarLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const senha = document.getElementById('login-pass').value;
+            const alertBox = document.getElementById('auth-alert');
+
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_cadastrados')) || [];
+            const contaValida = usuarios.find(u => u.email.toLowerCase() === email && u.senha === senha);
+
+            if (contaValida) {
+                logarSessao(contaValida);
+            } else {
+                alertBox.textContent = "E-mail ou senha incorretos. Tente novamente.";
+                alertBox.classList.remove('hidden');
+            }
+        }
+
+        function logarSessao(usuario) {
+            localStorage.setItem('user_name', usuario.nome);
+            localStorage.setItem('user_email', usuario.email.toLowerCase());
+            localStorage.setItem('user_empresa', usuario.empresa.toLowerCase());
+            localStorage.setItem('user_is_admin', usuario.isAdmin ? 'true' : 'false');
+            
+            if (!usuario.isAdmin) {
+                localStorage.setItem('user_setor', usuario.setor || '');
+                localStorage.setItem('user_funcao', usuario.funcao || '');
+                localStorage.setItem('user_telefone', usuario.telefone || '');
+            } else {
+                localStorage.removeItem('user_setor');
+                localStorage.removeItem('user_funcao');
+                localStorage.removeItem('user_telefone');
+            }
+
+            closeAuthModal();
+            atualizarNavbar();
+
+            if (usuario.isAdmin) {
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            const redirect = localStorage.getItem('redirect_target');
+            if (redirect) {
+                localStorage.removeItem('redirect_target');
+                window.location.href = redirect;
+            }
+        }
+
+        function verificarAcesso(e, url) {
+            if (!localStorage.getItem('user_name')) {
+                e.preventDefault();
+                localStorage.setItem('redirect_target', url);
+                openAuthModal('login');
+                return false;
+            }
+            return true;
+        }
+
+        function irParaQuestionarios() {
+            if (!localStorage.getItem('user_name')) {
+                localStorage.setItem('redirect_target', 'questionarios.html');
+                openAuthModal('login');
+                return;
+            }
+            window.location.href = 'questionarios.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('user_name');
+            localStorage.removeItem('user_email');
+            localStorage.removeItem('user_empresa');
+            localStorage.removeItem('user_is_admin');
+            localStorage.removeItem('user_setor');
+            localStorage.removeItem('user_funcao');
+            localStorage.removeItem('user_telefone');
+            localStorage.removeItem('redirect_target');
+            
+            window.location.href = 'index.html';
+        }
+
+        window.onload = function() {
+            atualizarNavbar();
+        };
+    </script>
+</body>
+</html>

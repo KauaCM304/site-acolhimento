@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário de Bem-Estar - Centro de Acolhimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #fdfbf7 0%, #f7f3e3 100%); }
+        .hero-gradient { background: radial-gradient(circle at 80% 20%, rgba(74, 222, 128, 0.15) 0%, transparent 60%); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased hero-gradient">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#0f3d2e] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3 hover:opacity-90 transition">
+                <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-sm">
+                    <i class="fa-solid fa-arrow-left text-xl text-[#4ade80]"></i>
+                </div>
+                <span class="font-bold text-lg tracking-wide uppercase">Voltar ao Início</span>
+            </a>
+            
+            <div class="flex items-center space-x-4">
+                <div id="user-area"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-3xl mx-auto px-6 py-12 w-full space-y-8">
+        
+        <!-- HEADER DA PÁGINA -->
+        <div class="space-y-2">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-500 text-slate-900 tracking-wide uppercase font-bold gap-1">
+                <i class="fa-solid fa-user-secret"></i> Pesquisa 100% Anônima
+            </span>
+            <h1 class="text-3xl font-extrabold text-[#0f3d2e] sm:text-4xl">Como você está se sentindo?</h1>
+            <p class="text-slate-600">
+                Sua resposta é muito importante. O painel administrativo verá apenas as respostas de maneira consolidada e anônima. A validação de envio único é feita localmente no seu navegador.
+            </p>
+        </div>
+
+        <!-- TELA DE RETORNO CASO JÁ TENHA RESPONDIDO -->
+        <div id="ja-respondido-card" class="hidden bg-white border border-emerald-100 rounded-3xl p-8 shadow-sm text-center space-y-4">
+            <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl border border-emerald-200">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800">Você já respondeu a este questionário!</h2>
+            <p class="text-sm text-slate-500 max-w-md mx-auto">
+                Obrigado pela sua colaboração. Suas respostas já foram processadas de forma completamente anônima no sistema central.
+            </p>
+        </div>
+
+        <!-- FORMULÁRIO DO QUESTIONÁRIO NATIVO -->
+        <form id="questionario-form" onsubmit="salvarRespostas(event)" class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-100 space-y-6">
+            
+            <!-- Pergunta 1 -->
+            <div class="space-y-3">
+                <label class="block text-base font-bold text-slate-800">1. Em uma escala geral, como você se sente em relação ao seu ambiente de trabalho hoje?</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <label class="flex items-center justify-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p1" value="Muito Bem" required class="mr-2 accent-[#0f3d2e]"> Muito Bem 😊
+                    </label>
+                    <label class="flex items-center justify-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p1" value="Bem" class="mr-2 accent-[#0f3d2e]"> Bem 🙂
+                    </label>
+                    <label class="flex items-center justify-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p1" value="Neutro" class="mr-2 accent-[#0f3d2e]"> Neutro 😐
+                    </label>
+                    <label class="flex items-center justify-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p1" value="Mal" class="mr-2 accent-[#0f3d2e]"> Mal 😟
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="space-y-3">
+                <label class="block text-base font-bold text-slate-800">2. Você se sente seguro(a) e acolhido(a) pela sua liderança direta?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="flex items-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p2" value="Totalmente seguro" required class="mr-2 accent-[#0f3d2e]"> Sim, totalmente seguro(a)
+                    </label>
+                    <label class="flex items-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p2" value="Parcialmente seguro" class="mr-2 accent-[#0f3d2e]"> Parcialmente seguro(a)
+                    </label>
+                    <label class="flex items-center p-3.5 bg-[#fdfbf7] border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition font-medium text-sm text-slate-700">
+                        <input type="radio" name="p2" value="Não me sinto seguro" class="mr-2 accent-[#0f3d2e]"> Não me sinto seguro(a)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pergunta 3 (Aberta) -->
+            <div class="space-y-3">
+                <label for="p3" class="block text-base font-bold text-slate-800">3. Quer desabafar ou detalhar melhor o motivo de como se sente? (Opcional)</label>
+                <textarea id="p3" rows="4" placeholder="Escreva aqui o que está sentindo ou pensando..." class="w-full bg-[#fdfbf7] border border-slate-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#0f3d2e] focus:bg-white transition resize-none"></textarea>
+            </div>
+
+            <!-- Botão Enviar -->
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-[#0f3d2e] hover:bg-[#0b2e22] text-white font-bold py-4 rounded-2xl shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-paper-plane text-[#4ade80]"></i>
+                    <span>Enviar Respostas de Bem-Estar</span>
+                </button>
+            </div>
+        </form>
+
+    </main>
+
+    <script>
+        function inicializarPagina() {
+            const userName = localStorage.getItem('user_name');
+            const userEmail = localStorage.getItem('user_email');
+
+            if (!userName) {
+                alert("Acesso restrito. Por favor, faça login primeiro.");
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('user-area').innerHTML = `
+                <div class="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full border border-white/10 text-sm font-medium">
+                    <i class="fa-regular fa-user-circle text-lg text-[#4ade80]"></i>
+                    <span>${userName.split(' ')[0]}</span>
+                </div>`;
+
+            const chavesRespondidas = JSON.parse(localStorage.getItem('questionarios_respondidos')) || [];
+            
+            if (chavesRespondidas.includes(userEmail)) {
+                document.getElementById('questionario-form').classList.add('hidden');
+                document.getElementById('ja-respondido-card').classList.remove('hidden');
+            }
+        }
+
+        function salvarRespostas(e) {
+            e.preventDefault();
+
+            const userEmail = localStorage.getItem('user_email');
+            const userEmpresa = localStorage.getItem('user_empresa');
+
+            const p1Value = document.querySelector('input[name="p1"]:checked').value;
+            const p2Value = document.querySelector('input[name="p2"]:checked').value;
+            const p3Value = document.getElementById('p3').value.trim() || 'Nenhum comentário adicional.';
+
+            // Trava local para evitar múltiplos envios do mesmo usuário
+            let chavesRespondidas = JSON.parse(localStorage.getItem('questionarios_respondidos')) || [];
+            chavesRespondidas.push(userEmail);
+            localStorage.setItem('questionarios_respondidos', JSON.stringify(chavesRespondidas));
+
+            // Salva apenas no histórico privado do próprio usuário
+            let historico = JSON.parse(localStorage.getItem('historico_atividades')) || [];
+            historico.push({
+                tipo: 'feedback',
+                titulo: 'Questionário de Bem-Estar Respondido',
+                detalhe: `Sentimento Geral: ${p1Value} | Relação com Liderança: ${p2Value}`,
+                data: new Date().toLocaleString('pt-BR')
+            });
+            localStorage.setItem('historico_atividades', JSON.stringify(historico));
+
+            // Salva na Base Geral (Chave: db_questionarios) totalmente anônimo
+            const dbQuestionarios = JSON.parse(localStorage.getItem('db_questionarios')) || [];
+            dbQuestionarios.push({
+                titulo: "Questionário de Bem-Estar",
+                empresa: userEmpresa ? userEmpresa.toLowerCase() : '',
+                data: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+                respostas: {
+                    "Sentimento Geral": p1Value,
+                    "Ambiente/Liderança": p2Value,
+                    "Desabafo/Comentários": p3Value
+                }
+            });
+            localStorage.setItem('db_questionarios', JSON.stringify(dbQuestionarios));
+
+            alert("Suas respostas foram salvas com sucesso de forma anônima!");
+            window.location.reload();
+        }
+
+        window.onload = inicializarPagina;
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denúncia - Centro de Acolhimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #fdfbf7 0%, #f7f3e3 100%); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#0f3d2e] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="hover:opacity-80 transition flex items-center space-x-3">
+                    <div class="bg-white/10 p-2.5 rounded-xl">
+                        <i class="fa-solid fa-arrow-left text-xl text-[#4ade80]"></i>
+                    </div>
+                    <span class="font-bold text-lg tracking-wide uppercase">Voltar ao Início</span>
+                </a>
+            </div>
+            <span class="text-sm font-semibold bg-red-950/40 px-4 py-2 rounded-full border border-red-500/30 text-red-300">Canal Seguro de Denúncias</span>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-3xl mx-auto px-6 py-12 w-full">
+        <div class="mb-8 space-y-2">
+            <h1 class="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Relato de Conduta
+            </h1>
+            <p class="text-slate-600 leading-relaxed">Este é um espaço seguro e protegido para relatar violações éticas de conformidade.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 space-y-6">
+            
+            <div class="bg-[#fef3c7] border border-[#fde68a] rounded-2xl p-5 flex items-center justify-between">
+                <div class="flex items-start space-x-3 max-w-md">
+                    <div class="p-2 bg-white text-amber-700 rounded-xl mt-0.5"><i class="fa-solid fa-user-secret"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">Deseja fazer este relato de forma anônima?</h4>
+                        <p class="text-xs text-slate-600 mt-0.5">Seus dados de login não serão gravados ou vinculados à denúncia em nosso sistema.</p>
+                    </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                    <input type="checkbox" id="anonimo-switch" onchange="toggleAnonimato()" class="sr-only peer">
+                    <div class="w-14 h-7 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-slate-350 after:border after:rounded-full after:h-5 after:w-6 after:transition-all peer-checked:bg-[#22c55e]"></div>
+                </label>
+            </div>
+
+            <form onsubmit="enviarDenuncia(event)" class="space-y-6">
+                <div id="identificacao-box" class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#fdfbf7] p-4 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Denunciante Autenticado</label>
+                        <div id="denuncia-user-name" class="text-sm font-semibold text-slate-700">Carregando...</div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">E-mail de Registro</label>
+                        <div id="denuncia-user-email" class="text-sm font-medium text-slate-500">Carregando...</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Classificação do Incidente</label>
+                    <select required id="denuncia-category" class="w-full bg-[#fdfbf7] border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#22c55e] focus:bg-white transition">
+                        <option value="" disabled selected>Selecione o tipo de ocorrência</option>
+                        <option value="Assédio Moral">Assédio Moral</option>
+                        <option value="Assédio Sexual">Assédio Sexual ou Discriminação</option>
+                        <option value="Desvio Ético">Fraude, Desvio ou Roubo</option>
+                        <option value="Outros">Outras violações éticas</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Descrição dos Fatos</label>
+                    <textarea required id="denuncia-text" rows="6" placeholder="Por favor, forneça o máximo de detalhes possível..." class="w-full bg-[#fdfbf7] border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#22c55e] focus:bg-white transition"></textarea>
+                </div>
+
+                <div id="success-toast" class="hidden p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl flex flex-col space-y-2 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-check text-lg text-emerald-600"></i>
+                        <span class="font-bold">Protocolo gerado com sucesso!</span>
+                    </div>
+                    <p class="text-xs text-emerald-700">O caso foi enviado diretamente de forma encriptada ao Comitê de Ética Independente.</p>
+                </div>
+
+                <button type="submit" id="btn-submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Protocolar Denúncia de Forma Segura</span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            const fullName = localStorage.getItem('user_name');
+            if (!fullName) { window.location.href = 'index.html'; return; }
+            document.getElementById('denuncia-user-name').innerText = fullName;
+            document.getElementById('denuncia-user-email').innerText = localStorage.getItem('user_email');
+        }
+
+        function toggleAnonimato() {
+            const isAnonimo = document.getElementById('anonimo-switch').checked;
+            const infoBox = document.getElementById('identificacao-box');
+            
+            if (isAnonimo) {
+                infoBox.classList.add('opacity-30', 'pointer-events-none');
+                document.getElementById('denuncia-user-name').innerText = "Oculto (Anônimo)";
+                document.getElementById('denuncia-user-email').innerText = "Oculto (Anônimo)";
+            } else {
+                infoBox.classList.remove('opacity-30', 'pointer-events-none');
+                document.getElementById('denuncia-user-name').innerText = localStorage.getItem('user_name');
+                document.getElementById('denuncia-user-email').innerText = localStorage.getItem('user_email');
+            }
+        }
+
+        function enviarDenuncia(e) {
+            e.preventDefault();
+            const isAnonimo = document.getElementById('anonimo-switch').checked;
+            const category = document.getElementById('denuncia-category').value;
+            const text = document.getElementById('denuncia-text').value.trim();
+
+            const userName = localStorage.getItem('user_name');
+            const userEmail = localStorage.getItem('user_email') || '';
+            const userEmpresa = localStorage.getItem('user_empresa');
+            
+            const dataAtual = new Date().toLocaleString('pt-BR');
+
+            // 1. Salva no histórico do usuário APENAS se NÃO for anônima
+            if (!isAnonimo) {
+                // Chave de histórico individual usando o e-mail do usuário
+                const keyHistorico = `historico_atividades_${userEmail.toLowerCase()}`;
+                const historico = JSON.parse(localStorage.getItem(keyHistorico)) || [];
+                historico.push({
+                    tipo: 'denuncia',
+                    titulo: `Denúncia protocolada: ${category}`,
+                    detalhe: 'Protocolo de segurança enviado de forma criptografada.',
+                    data: dataAtual // Salva a data legível com dia e hora
+                });
+                localStorage.setItem(keyHistorico, JSON.stringify(historico));
+            }
+
+            // 2. Salva na Base Geral de denúncias que o Admin acessa (com os dados mascarados)
+            const dbDenuncias = JSON.parse(localStorage.getItem('admin_db_denuncias')) || [];
+            dbDenuncias.push({
+                categoria: category,
+                relato: text,
+                anonima: isAnonimo,
+                usuario: isAnonimo ? 'Anônimo' : userName,
+                email: isAnonimo ? 'Oculto' : userEmail,
+                empresa: userEmpresa, // Mantido apenas para que o admin filtre por empresa
+                data: dataAtual
+            });
+            localStorage.setItem('admin_db_denuncias', JSON.stringify(dbDenuncias));
+
+            const btn = document.getElementById('btn-submit');
+            const toast = document.getElementById('success-toast');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>Registrando Protocolo...</span>`;
+
+            setTimeout(() => {
+                btn.classList.add('hidden');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
